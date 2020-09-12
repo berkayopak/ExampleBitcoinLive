@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title{
+    font-size: 4vh;
+  }
+
+  .extra-info{
+    font-size: 2vh;
+  }
+
+  .bitcoin-prices {
+    display: flex;
+    flex-direction: column;
+    background-color: #e8e8e8;
+    color: #002452;
+    font-size: 6vh;
+
+    .row {
+      border-bottom: #002452 solid 2px;
+
+      &.last {
+        border-bottom: none;
+      }
+
+      .label {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .value {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

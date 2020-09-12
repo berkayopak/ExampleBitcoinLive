@@ -1,0 +1,21 @@
+
+  .counter{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: #e8e8e8;
+    color: #002452;
+    font-size: 7vh;
+    border: #002452 solid 5px;
+    .column{
+      flex: 1;
+      display: inline-block;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      span{
+        text-align: center;
+      }
+    }
+  }
