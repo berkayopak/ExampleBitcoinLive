@@ -16,6 +16,7 @@ function Counter(props) {
     const [hours, setHours] = useState();
     const [minutes, setMinutes] = useState();
     const [seconds, setSeconds] = useState();
+    const [done, setDone] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => updateTime(), 1000);
@@ -23,6 +24,7 @@ function Counter(props) {
         if (parseInt(hours) <= 0 && parseInt(minutes) <= 0 && parseInt(seconds) <= 0) {
             clear();
             clearInterval(interval);
+            setDone(true);
         }
 
         return () => clearInterval(interval)
@@ -90,27 +92,27 @@ function Counter(props) {
             <div className="column">
                 <span>{hours ? hours : "00"}</span>
                 <div className="buttons">
-                    <IconButton onClick={() => setHour(+1)}><Icon
+                    <IconButton onClick={() => setHour(+1)} disabled={done} ><Icon
                         style={buttonStyle}>add_circle_outline</Icon></IconButton>
-                    <IconButton onClick={() => setHour(-1)}><Icon
+                    <IconButton onClick={() => setHour(-1)} disabled={done}><Icon
                         style={buttonStyle}>remove_circle_outline</Icon></IconButton>
                 </div>
             </div>
             <div className="column">
                 <span>{minutes ? minutes : "00"}</span>
                 <div className="buttons">
-                    <IconButton onClick={() => setMinute(+1)}><Icon
+                    <IconButton onClick={() => setMinute(+1)} disabled={done}><Icon
                         style={buttonStyle}>add_circle_outline</Icon></IconButton>
-                    <IconButton onClick={() => setMinute(-1)}><Icon
+                    <IconButton onClick={() => setMinute(-1)} disabled={done}><Icon
                         style={buttonStyle}>remove_circle_outline</Icon></IconButton>
                 </div>
             </div>
             <div className="column">
                 <span>{seconds ? seconds : "00"}</span>
                 <div className="buttons">
-                    <IconButton onClick={() => setSecond(+1)}><Icon
+                    <IconButton onClick={() => setSecond(+1)} disabled={done}><Icon
                         style={buttonStyle}>add_circle_outline</Icon></IconButton>
-                    <IconButton onClick={() => setSecond(-1)}><Icon
+                    <IconButton onClick={() => setSecond(-1)} disabled={done}><Icon
                         style={buttonStyle}>remove_circle_outline</Icon></IconButton>
                 </div>
             </div>
