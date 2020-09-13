@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './bitcoin-prices.scss';
 import axios from 'axios';
-import {Fade, AttentionSeeker, JackInTheBox} from "react-awesome-reveal";
+import {AttentionSeeker} from "react-awesome-reveal";
 
 function BitcoinPrices() {
     const apiEndPoint = 'https://api.coindesk.com/v1/bpi/currentprice.json';
