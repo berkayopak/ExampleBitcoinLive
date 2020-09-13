@@ -2,20 +2,20 @@ import React, {useState, useEffect} from 'react';
 import './counter.scss';
 import {IconButton, Icon} from '@material-ui/core';
 
+Number.prototype.pad = function (size) {
+    let s = String(this);
+    while (s.length < (size || 2)) {
+        s = "0" + s;
+    }
+    return s;
+};
+
 function Counter(props) {
     const buttonStyle = {fontSize: 50};
     const [endTime, setEndTime] = useState(props.endTime);
     const [hours, setHours] = useState();
     const [minutes, setMinutes] = useState();
     const [seconds, setSeconds] = useState();
-
-    Number.prototype.pad = function (size) {
-        let s = String(this);
-        while (s.length < (size || 2)) {
-            s = "0" + s;
-        }
-        return s;
-    };
 
     useEffect(() => {
         const interval = setInterval(() => updateTime(), 1000);
@@ -34,15 +34,20 @@ function Counter(props) {
         setSeconds(0);
     }
 
-    function updateTime(interval) {
+    function updateTime() {
         const timeLeft = endTime - new Date();
         calcTime(timeLeft);
     }
 
     function calcTime(timeLeft) {
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        const one_second = 1000;
+        const one_minute = (one_second * 60);
+        const one_hour = (one_minute * 60);
+
+        const hours = Math.floor(timeLeft / one_hour);
+        const minutes = Math.floor((timeLeft % one_hour) / one_minute);
+        const seconds = Math.floor((timeLeft % one_minute) / one_second);
+
         setHours(hours.pad());
         setMinutes(minutes.pad());
         setSeconds(seconds.pad());
@@ -63,7 +68,7 @@ function Counter(props) {
 
         if (((hours > 0 && result >= -1) || (hours <= 0 && result >= 0)) && result <= 60) {
             const _endTime = new Date(endTime);
-            if (result !== -1)
+            if (result > -1)
                 setMinutes(result.pad());
             setEndTime(_endTime.setMinutes(_endTime.getMinutes() + minute));
         }
@@ -74,7 +79,7 @@ function Counter(props) {
 
         if (result >= -1 && result <= 60) {
             const _endTime = new Date(endTime);
-            if (result !== -1)
+            if (result > -1)
                 setSeconds(result.pad());
             setEndTime(_endTime.setSeconds(_endTime.getSeconds() + second));
         }
